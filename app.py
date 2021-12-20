@@ -1,25 +1,24 @@
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, url_for, render_template
 
 app = Flask(__name__)
 
-@app.route('/home')
+@app.route('/main')
 @app.route('/')
-def hello_world():  # put application's code here
-    return 'Hello World!'
+def cv_func():
+    return render_template('cv1.html')
 
-@app.route('/about')
-def about_func():
-    print('About page')
-    return redirect('/desired')
+@app.route('/ContactMe')
+def contact_func():
+    return render_template('ContactMe.html')
 
-@app.route('/catalog')
-def catalog_func():
-    return redirect(url_for('desired_func'))
 
-@app.route('/desired')
-def desired_func():
-    return 'Welcome to the desired page!!!!'
-
+@app.route('/assignment8')
+def assignment8_func():
+    return render_template('assignment8.html',
+                           valid=True,
+                           Details={'name': 'Tzofnat','secondName':'Cohen'},
+                           hobbies=('Dance', 'Music', 'Animals', 'Travel'),
+                           Music='Rock')
 
 if __name__ == '__main__':
     app.run(debug=True)

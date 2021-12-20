@@ -1,0 +1,26 @@
+{% extends 'BaseFile.html' %}
+
+{% block title %} Assigment 8 {% endblock %}
+
+{% block content %}
+    {{ super() }}
+{% set page_name='assigment8' %}
+    {% if  valid %}
+        <h3>Validity is OK</h3>
+    {% else %}
+    <h2>Validity is not OK! Can't get in</h2>
+    {% endif %}
+
+    <h1> My Name : {{ Details.name | default('unknown', true | upper() ) }} {{  Details.secondName | default('unknown', true | upper() ) }} </h1>
+    <h1> My Hobbies  </h1>
+    <h2>Hobbies:</h2>
+    <ul>
+        {% for hobby in hobbies %}
+        <li> {{ hobby }}</li>
+        {% endfor %}
+    </ul>
+    <h2>Music:</h2>
+    <h1> Favorite Music  : {{ Music }} </h1>
+
+  {% include 'cv1.html' %}
+{% endblock %}
