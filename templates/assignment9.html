@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %} Assigment 9 {% endblock %}
+
+{% block content %}
+    {% set page_name ='Assigment 9'%}
+    <h1>Welcome to {{ page_name }} page!</h1>
+    <h2>Search Form</h2>
+    <form action="/assignment9"  method="get">
+        User id: <input name="user_id" type="text">
+        <input type="submit" name="search" value="search">
+    </form>
+
+     {% if user_name %}
+         <h3> the details of the selected user:</h3>
+         <h4> name: {{ u_name }} </h4>
+         <h4> email: {{ email }} </h4>
+         <h4> gender: {{ gender }} </h4>
+     {% else  %}
+         {% if users %}
+             <h3> full list: </h3>
+             <ul>
+             {% for id, info in users.items() %}
+                  <li>  {{ id }} </li>
+                   {% for key in info %}
+                      {{ key }} : {{ info[key] }} |
+                  {% endfor %}
+                   <p></p>
+             {% endfor %}
+             </ul>
+         {% endif %}
+         {% if not_found %}
+             <h3> User not found! Please Try Again </h3>
+         {% endif %}
+    {% endif %}
+
+    <hr>
+
+    <h2>Registration Form</h2>
+    {% if session.user_nickname %}
+        <h3> Logged-in, Welcome {{ session.user_nickname }} !</h3>
+        <button onclick="location.href='/logout'">Log out</button>
+    {% else %}
+        <h3>Please Log in</h3>
+        <form action="/assignment9" method="POST">
+            User Nickname: <input name="nickname" type="text">
+            Password: <input name="password" type="password">
+            <input type="submit" name="Login" value="Login">
+        </form>
+    {% endif %}
+
+{% endblock %}
