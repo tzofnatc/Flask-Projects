@@ -64,3 +64,8 @@ def logout_func():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+## assignment10
+from pages.assignment10.assignment10 import assignment10
+app.register_blueprint(assignment10)
