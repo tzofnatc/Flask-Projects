@@ -5,17 +5,15 @@
 
 {% block content %}
 {% set page_name='assigment10' %}
-    <h1>
-        Users Page
-    </h1>
+    <h1> Users Page</h1>
      {% for message in get_flashed_messages() %}
         <h3 style="color: red" >{{ message }}</h3>
     {% endfor %}
-    <h2> Insert Form:</h2>
+    <h2> Insertion Form:</h2>
     <form action="/insert_user" method="post">
         <input type="text" name="name" placeholder="Name">
-        <input type="text" name="age" placeholder="Age">
         <input type="email" name="email" placeholder="Email">
+        <input type="text" name="gender" placeholder="Gender">
         <input type="submit" value="Insert">
     </form>
     <hr>
@@ -26,8 +24,8 @@
         <input type="text" name="id" placeholder="id">
         <h3>value to update:</h3>
         <input type="text" name="name" placeholder="Name">
-        <input type="text" name="age" placeholder="Age">
         <input type="email" name="email" placeholder="Email">
+        <input type="text" name="gender" placeholder="Gender">
         <input type="submit" value="Update">
     </form>
     <hr>
@@ -45,7 +43,7 @@
 
         {% for user in users %}
             <li>
-            <b>   {{ user.id }}: </b>  {{ user.name }} ,  {{ user.age }}, Email: {{ user.email }}
+            <b>   {{ user.id }}: </b>  {{ user.name }} , {{ user.email }} , {{ user.gender }}
             </li>
         {% endfor %}
 

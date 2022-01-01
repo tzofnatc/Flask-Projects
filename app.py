@@ -1,6 +1,7 @@
 from flask import Flask, redirect, url_for, render_template, request, session
 
 app = Flask(__name__)
+app.secret_key= '123'
 
 @app.route('/main')
 @app.route('/')
