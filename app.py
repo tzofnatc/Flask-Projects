@@ -1,4 +1,7 @@
-from flask import Flask, redirect, url_for, render_template, request, session
+from flask import Flask, redirect, url_for, render_template, request, session, jsonify
+from pages.assignment10.interact_with_DB import interact_db
+import requests
+
 
 app = Flask(__name__)
 app.secret_key= '123'
@@ -70,3 +73,28 @@ if __name__ == '__main__':
 ## assignment10
 from pages.assignment10.assignment10 import assignment10
 app.register_blueprint(assignment10)
+
+## assignment11
+@app.route('/assignment11/users')
+def assignment11_users():
+    query = "select * from users"
+    query_result = interact_db(query=query, query_type='fetch')
+    response = jsonify(query_result)
+    return response
+
+@app.route('/assignment11/outer_source', methods=['GET', 'POST'])
+def assignment11_outer_source():
+    return render_template('assignment11.html')
+
+@app.route('/front_outer_source', methods=['post'])
+def req_frontend_func():
+     user_id = request.form['user_id']
+     return render_template('assignment11.html', id=user_id)
+
+@app.route('/backend_outer_source')
+def req_backend_func():
+    if request.args['user_id'] != '':
+        id = request.args['user_id']
+        res = requests.get(f'https://reqres.in/api/users/{id}')
+        user = res.json()
+    return render_template('assignment11.html', user=user)

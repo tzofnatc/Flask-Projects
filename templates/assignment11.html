@@ -1,0 +1,32 @@
+{% extends 'BaseFile.html' %}
+
+{% block title %} Assigment 11- Outer Source
+{% endblock %}
+
+{% block content %}
+    <h2> Req Frontend </h2>
+    <form action="/front_outer_source"  method="post">
+        User id for display: <input name="user_id" type="text" placeholder="User ID">
+       <input type="submit" name="search" value="search">
+    </form>
+    {% if id  %}
+            <body onload="getUsers({{ id }})">
+            </body>
+    {% endif %}
+
+    <script src="/static/fetch.js"> </script>
+    <hr>
+
+  <h2>Req Backend</h2>
+      <form action="/backend_outer_source"  method="get">
+        User id for display: <input name="user_id" type="text" placeholder="User ID">
+       <input type="submit" name="search" value="search">
+    </form>
+    {% if user %}
+        <h4>Name: {{ user.data.first_name }} {{ user.data.last_name }} </h4>
+        <img src="{{ user.data.avatar }}" alt="pic"> <br>
+          <a href="mailto:${user.data.email}">Send Email</a>
+    {% endif %}
+
+
+{% endblock %}
