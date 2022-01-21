@@ -98,3 +98,22 @@ def req_backend_func():
         res = requests.get(f'https://reqres.in/api/users/{id}')
         user = res.json()
     return render_template('assignment11.html', user=user)
+
+@app.route('/assignment12/restapi_users', defaults ={'user_id': 1})
+@app.route('/assignment12/restapi_users/<int:user_id>')
+def get_user_func(user_id):
+    query = "select * from users where id='%s';"%(user_id)
+    users = interact_db(query=query, query_type='fetch')
+    if len(users)==0:
+        return_db={
+            'Status': 'Failed',
+            'Message': 'User not found in DB!'
+        }
+    else:
+         return_db={
+            'Status' : 'Success',
+            'id':users[0].id,
+            'name': users[0].name,
+            'email': users[0].email,
+        }
+    return jsonify(return_db)
